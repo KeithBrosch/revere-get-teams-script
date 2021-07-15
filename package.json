@@ -1,0 +1,23 @@
+{
+  "name": "revere-get-teams-script",
+  "version": "1.0.0",
+  "description": "Scrapes vlr.gg to get a list of valid teams to be used in Revere mobile app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeithBrosch/revere-get-teams-script.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KeithBrosch/revere-get-teams-script/issues"
+  },
+  "homepage": "https://github.com/KeithBrosch/revere-get-teams-script#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "request": "^2.88.2"
+  }
+}
