@@ -1,6 +1,7 @@
 // this script should be run once per day to get any new teams on the vlr.gg rankings page
 const cheerio = require('cheerio');
 const request = require('request');
+const axios = require('axios');
 
 const url = 'https://www.vlr.gg/rankings';
 
@@ -28,5 +29,7 @@ let teams = [];
             }
         }
         console.log(teams);
-        // make an axios call to store these teams in the DB if they aren't already in it
+        axios.post('http://localhost:5000/teams', {
+            teams,
+        })
     });
