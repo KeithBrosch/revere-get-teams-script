@@ -2,8 +2,12 @@
 const cheerio = require('cheerio');
 const request = require('request');
 const axios = require('axios');
+var cron = require('node-cron');
 
+cron.schedule('0 0 0 * * *', () => {
+    
 const url = 'https://www.vlr.gg/rankings';
+
 
 let teams = [];
     request(url, (error, response) => {
@@ -31,5 +35,9 @@ let teams = [];
         console.log(teams);
         axios.post('http://localhost:5000/teams', {
             teams,
-        })
+        }).catch((error) => 
+            { 
+                console.log(error)
+            });
     });
+})
