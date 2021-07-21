@@ -5,11 +5,14 @@ const axios = require('axios');
 var cron = require('node-cron');
 
 cron.schedule('0 0 0 * * *', () => {
+
+    console.log(`starting scrape at ${new Date}`);
     
-const url = 'https://www.vlr.gg/rankings';
+    const url = 'https://www.vlr.gg/rankings';
 
 
-let teams = [];
+    let teams = [];
+
     request(url, (error, response) => {
         if (error) {
             console.log(error);
@@ -32,10 +35,13 @@ let teams = [];
                 teams.push(team);
             }
         }
-        console.log(teams);
+        // console.log(teams);
         axios.post('http://localhost:5000/teams', {
             teams,
-        }).catch((error) => 
+        }).then(() => {
+            console.log(`finished scrape at ${new Date}`);
+        })
+        .catch((error) => 
             { 
                 console.log(error)
             });
