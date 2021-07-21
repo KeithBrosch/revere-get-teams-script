@@ -2,7 +2,7 @@
 const cheerio = require('cheerio');
 const request = require('request');
 const axios = require('axios');
-var cron = require('node-cron');
+const cron = require('node-cron');
 
 cron.schedule('0 0 0 * * *', () => {
 
