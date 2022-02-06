@@ -2,7 +2,14 @@
 const cheerio = require("cheerio");
 const request = require("request");
 const axios = require("axios");
-const cron = require("node-cron");
+const dotenv = require("dotenv");
+
+dotenv.config({
+  path: "./.env",
+});
+
+
+const apiBase = process.env.HEROKU_API_BASE || process.env.LOCAL_API_BASE;
 
 function getTeams() {
   console.log(`starting scrape at ${new Date()}`);
@@ -34,14 +41,14 @@ function getTeams() {
         };
         teams.push(team);
       }
-    }
-    // console.log(teams);
+    };
+    // console.log(teams)
     axios
-      .post("http://localhost:5000/teams", {
+      .post(`${apiBase}/teams`, {
         teams,
       })
       .then(() => {
-        console.log(`finished scrape at ${new Date()}`);
+        console.log(`finished scrape at ${new Date()} - ${teams.length} teams found`);
       })
       .catch((error) => {
         console.log(error);
