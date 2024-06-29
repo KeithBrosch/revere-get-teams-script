@@ -43,16 +43,16 @@ function getTeams() {
       }
     }
     // console.log(teams);
-  //   axios
-  //     .post(apiBase, {
-  //       teams,
-  //     })
-  //     .then(() => {
-  //       console.log(`finished scrape at ${new Date()}`);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
+    axios
+      .post(apiBase, {
+        teams,
+      })
+      .then(() => {
+        console.log(`finished scrape at ${new Date()}`);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   })
 };
 
