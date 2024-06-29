@@ -3,11 +3,18 @@ const cheerio = require("cheerio");
 const request = require("request");
 const axios = require("axios");
 const cron = require("node-cron");
+const dotenv = require("dotenv");
+
+dotenv.config({
+  path: "./.env",
+});
+
 
 function getTeams() {
   console.log(`starting scrape at ${new Date()}`);
 
   const url = "https://www.vlr.gg/rankings";
+  const apiBase = process.env.CURR_ENVIRONMENT == "prod" ? process.env.HEROKU_API_BASE : process.env.LOCAL_API_BASE;
 
   let teams = [];
 
@@ -36,16 +43,16 @@ function getTeams() {
       }
     }
     // console.log(teams);
-    axios
-      .post("http://localhost:5000/teams", {
-        teams,
-      })
-      .then(() => {
-        console.log(`finished scrape at ${new Date()}`);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  //   axios
+  //     .post(apiBase, {
+  //       teams,
+  //     })
+  //     .then(() => {
+  //       console.log(`finished scrape at ${new Date()}`);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
   })
 };
 
