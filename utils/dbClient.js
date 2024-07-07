@@ -13,9 +13,13 @@ async function insertMissingTeamsForGame(teams, game = Games.valorant) {
     const newTeams = teams.filter((x) => !existingTeamIds.includes(parseInt(x.id)));
     const formattedTeams = newTeams.map((x) => ({ intragame_team_id: parseInt(x.id), name: x.name, game_id: game }));
 
+    //sometimes vlr.gg has the same team in multiple regions resulting in the team getting more than 1 row in the table.
+    //hacky way to unique-ify the teams from the scrape before going to DB.
+    let filteredList = [...new Set(formattedTeams.map(JSON.stringify))].map(JSON.parse)
+
     const { error: insertError } = await supaClient
         .from('teams')
-        .insert(formattedTeams);
+        .insert(filteredList);
     
     if (insertError) console.error(insertError);
 }
